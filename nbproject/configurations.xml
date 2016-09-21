@@ -8,6 +8,7 @@
       <itemPath>Client.h</itemPath>
       <itemPath>Mqp.cpp</itemPath>
       <itemPath>Mqp.h</itemPath>
+      <itemPath>NoCopy.h</itemPath>
       <itemPath>Rpc.cpp</itemPath>
       <itemPath>Rpc.h</itemPath>
       <itemPath>Server.cpp</itemPath>
@@ -54,6 +55,8 @@
       </item>
       <item path="Mqp.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="NoCopy.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Rpc.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Rpc.h" ex="false" tool="3" flavor2="0">
@@ -96,6 +99,8 @@
       <item path="Mqp.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Mqp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="NoCopy.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Rpc.cpp" ex="false" tool="1" flavor2="0">
       </item>

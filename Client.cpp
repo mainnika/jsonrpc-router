@@ -11,15 +11,8 @@ connection_id(connection_id), handle(handle) {
 Client::~Client() {
 }
 
-bool Client::is_authorized() {
+bool Client::is_authorized() const {
     return !this->user_id.empty();
-}
-
-void Client::on_message(std::string& message) {
-
-    std::cout
-            << "client_id: " << this->connection_id << std::endl
-            << "message: " << message << std::endl;
 }
 
 void Client::on_connect() {

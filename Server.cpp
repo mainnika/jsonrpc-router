@@ -8,7 +8,8 @@
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
 
-Server::Server() : websocketpp::server<websocketpp::config::asio>() {
+Server::Server() : jsonrpc::AbstractServerConnector(), websocketpp::server<websocketpp::config::asio>(),
+rpc(this) {
 
     this->init_asio();
     this->set_open_handler(std::bind(&Server::on_connect, this, std::placeholders::_1));
@@ -36,7 +37,7 @@ void Server::on_message(Server* self, Client *client, Server::message_ptr messag
             << "thread_id: " << std::this_thread::get_id() << std::endl
             << "message: " << message << std::endl;
 
-    client->on_message(message);
+    self->OnRequest(message, client);
 }
 
 void Server::on_connect(Server* self, websocketpp::connection_hdl handle) {
@@ -52,15 +53,15 @@ void Server::on_connect(Server* self, websocketpp::connection_hdl handle) {
 
     if (self->clients.insert(accessor, uuid)) {
 
-        auto client = std::make_shared<Client>(uuid, handle);
+        auto client = new Client(uuid, handle);
         auto connection = self->get_con_from_hdl(handle);
 
         std::cout << "connection was successfully established: " << uuid << std::endl;
 
         accessor->second = client;
 
-        connection->set_message_handler(std::bind(&Server::on_message, self, client.get(), std::placeholders::_2));
-        connection->set_close_handler(std::bind<void(&)(Server*, Client*)>(Server::on_disconnect, self, client.get()));
+        connection->set_message_handler(std::bind(&Server::on_message, self, client, std::placeholders::_2));
+        connection->set_close_handler(std::bind<void(&)(Server*, Client*)>(Server::on_disconnect, self, client));
 
         client->on_connect();
 
@@ -94,4 +95,31 @@ void Server::on_disconnect(Server* self, Client *client) {
     if (self->clients.find(accessor, client->connection_id)) {
         self->clients.erase(accessor);
     }
+
+    delete client;
+}
+
+bool Server::SendResponse(const std::string& response, void* data) {
+
+    try {
+        Client *client = static_cast<Client*> (data);
+        auto connection = this->get_con_from_hdl(client->handle);
+
+        connection->send(response);
+        return true;
+
+    } catch (...) {
+
+        return false;
+    }
+}
+
+bool Server::StartListening() {
+
+    return false;
+}
+
+bool Server::StopListening() {
+
+    return false;
 }

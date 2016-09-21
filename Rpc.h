@@ -1,17 +1,18 @@
 #pragma once
 
-#include "Mqp.h"
+#include "NoCopy.h"
 
 #include <jsonrpccpp/server.h>
 
-class Rpc : public jsonrpc::AbstractServer<Rpc> {
+class Server;
+
+class Rpc : public jsonrpc::AbstractServer<Server>, private NoCopy {
 public:
 
-    Rpc();
+    Rpc(Server *server);
     virtual ~Rpc();
 
 private:
 
-    Mqp connector;
-
+    Mqp mqp;
 };

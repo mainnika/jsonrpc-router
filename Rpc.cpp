@@ -1,6 +1,9 @@
 #include "Rpc.h"
 
-Rpc::Rpc() : AbstractServer(this->connector, jsonrpc::JSONRPC_SERVER_V2) {
+#include "Server.h"
+
+Rpc::Rpc(Server *server) :
+jsonrpc::AbstractServer<Server>(*server, jsonrpc::JSONRPC_SERVER_V2) {
 }
 
 Rpc::~Rpc() {
