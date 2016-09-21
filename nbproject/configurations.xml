@@ -6,6 +6,10 @@
                    projectFiles="true">
       <itemPath>Client.cpp</itemPath>
       <itemPath>Client.h</itemPath>
+      <itemPath>Mqp.cpp</itemPath>
+      <itemPath>Mqp.h</itemPath>
+      <itemPath>Rpc.cpp</itemPath>
+      <itemPath>Rpc.h</itemPath>
       <itemPath>Server.cpp</itemPath>
       <itemPath>Server.h</itemPath>
       <itemPath>helpers.cpp</itemPath>
@@ -36,12 +40,23 @@
             <linkerLibStdlibItem>PosixThreads</linkerLibStdlibItem>
             <linkerLibLibItem>boost_system</linkerLibLibItem>
             <linkerLibLibItem>tbb</linkerLibLibItem>
+            <linkerLibLibItem>jsoncpp</linkerLibLibItem>
+            <linkerLibLibItem>jsonrpccpp-common</linkerLibLibItem>
+            <linkerLibLibItem>jsonrpccpp-server</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
       <item path="Client.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Client.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Mqp.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Mqp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Rpc.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Rpc.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Server.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -77,6 +92,14 @@
       <item path="Client.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Client.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Mqp.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Mqp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Rpc.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Rpc.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Server.cpp" ex="false" tool="1" flavor2="0">
       </item>

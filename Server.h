@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Rpc.h"
 #include "helpers.h"
 
 #include <thread>
@@ -26,6 +27,7 @@ private:
     typedef tbb::concurrent_hash_map<boost::uuids::uuid, std::shared_ptr<Client>> clients_t;
     typedef tbb::concurrent_hash_map<std::string, std::shared_ptr<Client>> authorized_clients_t;
 
+    Rpc rpc;
     clients_t clients;
     authorized_clients_t authorized_clients;
 
