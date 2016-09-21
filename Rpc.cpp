@@ -12,19 +12,19 @@ server(server), handler(jsonrpc::RequestHandlerFactory::createProtocolHandler(js
 
     this->server->SetHandler(this->handler);
 
-    this->add_method(jsonrpc::Procedure("AuthRequest", jsonrpc::PARAMS_BY_NAME, jsonrpc::JSON_STRING), new Authorizer());
+    this->add_method(jsonrpc::Procedure("AuthRequest", jsonrpc::PARAMS_BY_NAME, jsonrpc::JSON_OBJECT, NULL), std::make_unique<Authorizer>());
 }
 
 Rpc::~Rpc() {
 }
 
-void Rpc::add_method(const jsonrpc::Procedure &proc, AbstractService* handler) {
+void Rpc::add_method(const jsonrpc::Procedure &proc, std::unique_ptr<AbstractService> handler) {
 
     auto name = proc.GetProcedureName();
     Rpc::methods_t::accessor accessor;
 
     if (this->methods.insert(accessor, name)) {
-        accessor->second = handler;
+        accessor->second = std::move(handler);
         this->handler->AddProcedure(proc);
     }
 }
