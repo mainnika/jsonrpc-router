@@ -13,9 +13,12 @@ public:
 
     Client(boost::uuids::uuid connection_id, websocketpp::connection_hdl handle);
     virtual ~Client();
+    
+    bool is_authorized();
 
 private:
 
+    const std::string user_id;
     const boost::uuids::uuid connection_id;
     const websocketpp::connection_hdl handle;
 

@@ -85,9 +85,13 @@ void Server::on_disconnect(Server* self, Client *client) {
             << "thread_id: " << std::this_thread::get_id() << std::endl
             << "disconnect_client: " << client->connection_id << std::endl;
 
+    Server::authorized_clients_t::accessor authorized_accessor;
+    if (client->is_authorized() && self->authorized_clients.find(authorized_accessor, client->user_id)) {
+        self->authorized_clients.erase(authorized_accessor);
+    }
+
     Server::clients_t::accessor accessor;
     if (self->clients.find(accessor, client->connection_id)) {
         self->clients.erase(accessor);
     }
 }
-

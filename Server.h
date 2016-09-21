@@ -4,6 +4,7 @@
 
 #include <thread>
 #include <memory>
+#include <string>
 
 #include <websocketpp/server.hpp>
 #include <websocketpp/config/asio_no_tls.hpp>
@@ -23,8 +24,10 @@ public:
 
 private:
     typedef tbb::concurrent_hash_map<boost::uuids::uuid, std::shared_ptr<Client>> clients_t;
+    typedef tbb::concurrent_hash_map<std::string, std::shared_ptr<Client>> authorized_clients_t;
 
     clients_t clients;
+    authorized_clients_t authorized_clients;
 
     static void on_message(Server *self, Client *client, Server::message_ptr message);
     static void on_connect(Server *self, websocketpp::connection_hdl handle);
