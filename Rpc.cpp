@@ -2,6 +2,7 @@
 #include "Server.h"
 
 #include "static-services/Authorizer.h"
+#include "static-services/TimeGet.h"
 
 #include <functional>
 
@@ -13,6 +14,7 @@ server(server), handler(jsonrpc::RequestHandlerFactory::createProtocolHandler(js
     this->server->SetHandler(this->handler);
 
     this->add_method(jsonrpc::Procedure("AuthRequest", jsonrpc::PARAMS_BY_NAME, jsonrpc::JSON_OBJECT, NULL), std::make_unique<Authorizer>());
+    this->add_method(jsonrpc::Procedure("TimeGet", jsonrpc::PARAMS_BY_NAME, jsonrpc::JSON_INTEGER, NULL), std::make_unique<TimeGet>());
 }
 
 Rpc::~Rpc() {
